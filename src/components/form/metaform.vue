@@ -312,9 +312,11 @@
                 if(res&&res.then){
                     res.then(function(){
                         _this.preprocessed=true;
+                        _this.onFormInited();
                     });
                 }else{
                     _this.preprocessed=true;
+                    _this.onFormInited();
                 }
             },
             fillDefaultByQuery(_model,metaEntity){//创建模式时model用url参数填充
