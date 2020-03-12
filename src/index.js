@@ -90,6 +90,7 @@ import OrgSelector from "./components/form/control_tmpl/org-select/select-org"
 import EntitySelect from './components/entity-select/index'
 
 import ObjectEditor from './components/form/control_tmpl/object-editor/index';
+import MultiObjectEditor from './components/form/control_tmpl/object-editor-multi/index';
 
 const formComponents={
     SingleLineText,
@@ -145,7 +146,8 @@ const formComponents={
     UserSelector,
     OrgSelector,
 
-    ObjectEditor
+    ObjectEditor,
+    MultiObjectEditor
 };
 const gridInnerComponents={
     'm-grid-render-html':gridRenderHtml,

@@ -159,7 +159,7 @@ function rowSecurityEnabled(model){
  * @param model
  */
 function loadMetaEntityFromMode(context,modelName,model){
-  var opt= {
+  let opt= {
       name: modelName,
       title: model.title,
       rowSecurityEnabled:rowSecurityEnabled(model),
@@ -172,13 +172,13 @@ function loadMetaEntityFromMode(context,modelName,model){
       projectId: currentProjectId
   }
 
-  var metaEntity=MetaEntityCls(opt);
-  var propertyContext=_.extend({
+  let metaEntity=MetaEntityCls(opt);
+    let propertyContext=_.extend({
     metaEntity:metaEntity,
     model:model
   },context);
-  var index=0;
-  var relations=[];
+    let index=0;
+    let relations=[];
   _.forIn(model.properties,function (val,key) {
     var isRelation=firstNotNaN(val["x-relation"],false);
     if(isRelation){
@@ -186,7 +186,7 @@ function loadMetaEntityFromMode(context,modelName,model){
       relations.push(metaRelation);
       return;
     }
-    var metaField=loadMetaFieldFromProperty(propertyContext,key,val);
+      let metaField=loadMetaFieldFromProperty(propertyContext,key,val);
     metaField["displayOrder"]=index;
     metaEntity.fields[key]=metaField;
     index++;
@@ -268,7 +268,8 @@ function loadMetaFieldFromProperty(context,propertyName,property){
       maximum: property["maximum"],
       minimum: property["minimum"],
       enum: property["enum"],
-      type: property["type"],
+      type: firstNotNaN(property["type"],getRefTypeName(property["$ref"])),
+      itemsType:(property["type"]==="array"?getRefTypeName(property["items"]["$ref"]):null),
       format: property["format"],
       isRelationField: false,
       relations: [],
@@ -335,6 +336,9 @@ function fillInputTypeParams(context,metaField,property) {
   }
   if(!_.isNaN(property["format"])){
     metaField.inputTypeParams["format"]=property["format"];
+  }
+  if(property["type"]=="array"){
+      metaField.inputTypeParams["itemsType"]=getRefTypeName(property["items"]["$ref"]);
   }
   let xOptions=property["x-options"];
   if(xOptions){
@@ -410,6 +414,13 @@ function firstNotNaN(){
     }
   });
   return reval;
+}
+
+function getRefTypeName(typeRef) {
+    if(typeRef==null || _.isUndefined(typeRef)){
+        return null;
+    }
+    return typeRef.replace("#/definitions/","");
 }
 
 export default {

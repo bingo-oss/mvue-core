@@ -133,7 +133,13 @@
             //创建模式，继续初始化，因为初始模型数据已经存在了
             if(this.isCreate){
                 //先根据后端定义填充所有属性的默认值
-                this.metaEntity.fillDefault(this.entity,this.calc).then(_entity=>{
+                let p=null;
+                if(this.localModel){
+                    p=Promise.resolve(this.localModel);
+                }else{
+                    p=this.metaEntity.fillDefault(this.entity,this.calc);
+                }
+                p.then(_entity=>{
                     this.entity=_entity;
                     //如果url参数是实体的字段则填充相应的模型数据
                     initByMetadata.initModelByQueryParams(this,this.entity);
@@ -234,15 +240,19 @@
                     /*_.forIn(this.entity, (value, key) => {
                         this.entity[key] = data[key];
                     });*/
-                    _.forIn(data, (value, key) => {
-                        //保存从服务端获取的entity数据中，不是当前实体字段的冗余数据key
-                        let mField=this.metaEntity.findField(key);
-                        if(!mField){
-                            this.ignoreKeys[key]=true;
-                        }
-                        //将所有数据项设置到当前entity对象中
-                        this.$set(this.entity,key,value);
-                    });
+                    if(data==this.localModel){
+                        this.entity=this.localModel;
+                    }else{
+                        _.forIn(data, (value, key) => {
+                            //保存从服务端获取的entity数据中，不是当前实体字段的冗余数据key
+                            let mField=this.metaEntity.findField(key);
+                            if(!mField){
+                                this.ignoreKeys[key]=true;
+                            }
+                            //将所有数据项设置到当前entity对象中
+                            this.$set(this.entity,key,value);
+                        });
+                    }
                     this.initOthers();
                 });
             },

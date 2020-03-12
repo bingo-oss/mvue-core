@@ -200,7 +200,7 @@ export default function (options) {
             if (metaField.semantics == "title") {
                 fields.splice(0, 0, key);
             } else {
-                if (!metaField.identity && !metaField.readonly) {
+                if (!metaField.readonly || (metaField.identity && metaField.name!="id") ) {
                     fields.push(key);
                 }
             }

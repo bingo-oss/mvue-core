@@ -122,16 +122,18 @@ export default {
     },
     computed:{
         itemClass(){
-            let comTypeDef=controlTypeService.componentTypes[this.formItem.componentType];
-            let _class={
-                'has-warn-desc':this.description&&this.descLevel=='warn',
-                'zero-content-margin-left':!this.showLabel,
-                'zero-margin-bottom':this.zeroMarginBottom
-            };
-            if(comTypeDef.class){
-                _class[comTypeDef.class]=true;
+            if(this.formItem) {
+                let comTypeDef = controlTypeService.componentTypes[this.formItem.componentType];
+                let _class = {
+                    'has-warn-desc': this.description && this.descLevel == 'warn',
+                    'zero-content-margin-left': !this.showLabel,
+                    'zero-margin-bottom': this.zeroMarginBottom
+                };
+                if (comTypeDef.class) {
+                    _class[comTypeDef.class] = true;
+                }
+                return _class;
             }
-            return _class;
         }
     },
     watch:{
@@ -281,7 +283,7 @@ export default {
                     if(controlRef&&_.isFunction(controlRef[validateMethod])){
                         controlRef[validateMethod](rule, value, callback);
                     }else{
-                        callback(); 
+                        callback();
                     }
                 },
                 trigger: 'change'
