@@ -1,7 +1,7 @@
 <template>
   <div class="bvue-page" v-if="!noPage">
     <b-childheader v-if="showHeader" :title="innerTitle" :subtitle="header.description||header.subtitle" :show-back="header.showBack" :back-route="header.backRoute"></b-childheader>
-    <div class="bvue-page-body" v-if="renderLayout">
+    <div class="bvue-page-body" v-if="renderLayout&&pageSettings.layout">
         <meta-layout v-if="!showCard" :layout="pageSettings.layout"></meta-layout>
         <Card v-else>
             <meta-layout :layout="pageSettings.layout"></meta-layout>

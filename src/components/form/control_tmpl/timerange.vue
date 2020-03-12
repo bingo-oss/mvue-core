@@ -57,7 +57,7 @@ export default {
                     return null;
                 }
                 let _valueValidPartLeft=dateType.formatTime(this.value[0],timePrecision);
-                let _valueValidPartRight=dateType.formatDate(this.value[1],timePrecision);
+                let _valueValidPartRight=dateType.formatTime(this.value[1],timePrecision);
                 return [_valueValidPartLeft,_valueValidPartRight];
             }
             return null;
