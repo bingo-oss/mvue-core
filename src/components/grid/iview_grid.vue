@@ -117,7 +117,7 @@
                 <slot name="header-quicksearch">
                     <Input class="quicksearch-input" search  v-if="toolbar.quicksearch&&toolbar.quicksearch.fields"
                            v-model="quicksearchKeyword" @on-search="reload"
-                           :placeholder="toolbar.quicksearch.placeholder"  />
+                           :placeholder="toolbar.quicksearch.placeholder"  clearable/>
                     <Button v-if="innerToolbar.advanceSearchFields
                             && innerToolbar.advanceSearchFields.length>0
                             && !innerToolbar.advFormPopup"

@@ -1,5 +1,5 @@
 <template>
-    <div v-html="value" :class="{'ivu-table-cell-ellipsis':true}" :title="value"></div>
+    <div v-html="relationRefValue()" :class="{'ivu-table-cell-ellipsis':true}" :title="relationRefValue()"></div>
 </template>
 <script>
 import controlTypeService from '../../form/js/control_type_service';
@@ -21,12 +21,16 @@ export default {
     data(){
         let names=this.column.key.split('.');
         let relationName=names[0];
-        let targetEntityField=names[1];
-        let expandData=this.item[relationName];
-        var value = controlTypeService.formatData(expandData, this.targetField);
         return {
-            value:value
+            relationName:relationName
         };
+    },
+    methods:{
+        relationRefValue(){
+            let expandData=this.item[this.relationName];
+            let value = controlTypeService.formatData(expandData, this.targetField);
+            return value;
+        }
     }
 }
 </script>
