@@ -238,25 +238,29 @@ export default {
                 //_this.setDefaultQueryOptions();
                 //return;
             }
-            metaservice.getViewByDefaultShortId(Object.assign({id: viewShortId},setData))
-                .then(({ data }) => {
-                    if(setData.getDefaultForm&&data.viewFields){
-                        //取的是默认视图
-                        data = data.viewFields
-                    }
-                    //需要通过viewId--获取配置,不需要预定义
-                    _this.viewDef = data;//存入视图配置
-                    _this.metaEntity = metabase.findMetaEntity(data.metaEntityName);
-                    if(!_this.metaEntity){
-                        metabase.initMetabase(data.projectId,true).then(()=>{
-                            _this.getMetaViewToGrid(data);
-                        })
-                    }else{
-                        _this.getMetaViewToGrid(data)
-                    }
-                }, (resp)=> {
-                    _this.setDefaultQueryOptions();
-                });
+            if(viewShortId){
+                metaservice.getViewByDefaultShortId(Object.assign({id: viewShortId},setData))
+                    .then(({ data }) => {
+                        if(setData.getDefaultForm&&data.viewFields){
+                            //取的是默认视图
+                            data = data.viewFields
+                        }
+                        //需要通过viewId--获取配置,不需要预定义
+                        _this.viewDef = data;//存入视图配置
+                        _this.metaEntity = metabase.findMetaEntity(data.metaEntityName);
+                        if(!_this.metaEntity){
+                            metabase.initMetabase(data.projectId,true).then(()=>{
+                                _this.getMetaViewToGrid(data);
+                            })
+                        }else{
+                            _this.getMetaViewToGrid(data)
+                        }
+                    }, (resp)=> {
+                        _this.setDefaultQueryOptions();
+                    });
+            }else{
+                _this.setDefaultQueryOptions();
+            }
         },
         getMetaViewToGrid(data){
             let _this = this;
