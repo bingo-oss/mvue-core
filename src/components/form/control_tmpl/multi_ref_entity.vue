@@ -45,12 +45,13 @@
                         </span>
                     </template>
                 </Multiselect>
-                <m-entity-select 
+                <m-entity-select
                     :entity-name="formItem.componentParams.entityId"
-                    :value="selectedItem" 
+                    :value="selectedItem"
                     :append="true"
                     :multiple="true"
                     :disabled="disabled"
+                    :grid-settings="gridSettings"
                     :query-options="innerQueryOptions"
                     @on-select-change="confirmSelect">
                 </m-entity-select>
@@ -74,9 +75,12 @@ export default {
         }
     },
     data: function(){
-        var entityResource=null;
-        if(this.formItem.componentParams&&this.formItem.componentParams.entityResourceUrl){
+        let entityResource=null;
+        let metaEntity=this.$metaBase.findMetaEntity(this.formItem.componentParams.entityId);
+        if(this.formItem.componentParams.entityResourceUrl){
             entityResource= context.buildResource(this.formItem.componentParams.entityResourceUrl);
+        }else{
+            entityResource= metaEntity.dataResource();
         }
         let hasReadPerm=sc.hasReadPerm(this.formItem.componentParams.entityId);
         return {
@@ -84,6 +88,15 @@ export default {
             selectedItem:[],//已经选择的项
             entityResource:entityResource//获取实体数据的操作resource
         };
+    },
+    computed:{
+        gridSettings(){
+            let settings=this.formItem.componentParams.gridSettings ||{};
+            if(this.formItem.componentParams.entityResourceUrl){
+                settings.queryUrl=this.formItem.componentParams.entityResourceUrl;
+            }
+            return settings;
+        }
     },
     methods: {
         buildQueryOptions(params,keyword){

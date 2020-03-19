@@ -46,6 +46,7 @@
                     :append="true"
                     :disabled="disabled"
                     :query-options="innerQueryOptions"
+                    :grid-settings="gridSettings"
                     @on-select-change="confirmSelect">
                 </m-entity-select>
             </div>
@@ -67,7 +68,7 @@ export default {
     data: function(){
         var entityResource=null;
         let metaEntity=this.$metaBase.findMetaEntity(this.formItem.componentParams.entityId);
-        if(this.formItem.componentParams&&this.formItem.componentParams.entityResourceUrl){
+        if(this.formItem.componentParams.entityResourceUrl){
             entityResource= context.buildResource(this.formItem.componentParams.entityResourceUrl);
         }else{
             entityResource= metaEntity.dataResource();
@@ -79,11 +80,17 @@ export default {
             selectedItem:null,//已经选择的项
             entityResource:entityResource,//获取实体数据的操作resource
             hasViewPage:false,
-            refEntityViewOpt:{},
-            widgetContext:{}
+            refEntityViewOpt:{}
         };
     },
     computed:{
+        gridSettings(){
+            let settings=this.formItem.componentParams.gridSettings ||{};
+            if(this.formItem.componentParams.entityResourceUrl){
+                settings.queryUrl=this.formItem.componentParams.entityResourceUrl;
+            }
+            return settings;
+        },
         canView(){
             if(!this.selectedItem){
                 return false;
