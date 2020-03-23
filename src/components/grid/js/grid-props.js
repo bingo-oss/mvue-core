@@ -61,6 +61,10 @@ export default{
             type: Boolean,
             default: true
         },
+        "selectionBeforeIndex": {//是否多选列在序号列之前
+            type: Boolean,
+            default: false
+        },
         "showRowStatus": {//是否显示行编辑状态列
             type: Boolean,
             default: false

@@ -223,9 +223,10 @@ function  initColumns(grid) {
     };
     __cols.push(expandCol);
   }
-  //序号列放在多选列前面
+  let indexCol=null,selectionCol=null;
+  //序号列
   if(grid.showIndex) {
-    let indexCol={
+    indexCol={
       type: 'index',
       key:'__index__',
       width: 50,
@@ -234,15 +235,29 @@ function  initColumns(grid) {
     if(grid.indexColumnFixed){
       indexCol.fixed=grid.indexColumnFixed;
     }
-    __cols.push(indexCol);
   }
   //多选框列
   if(grid.showSelection){
-    let selectionCol={type: 'selection',key:'__selection__',width:50,align:defaultAlign};
+    selectionCol={type: 'selection',key:'__selection__',width:50,align:defaultAlign};
     if(grid.selectionColumnFixed){
       selectionCol.fixed=grid.selectionColumnFixed;
     }
-    __cols.push(selectionCol);
+  }
+  //多选列在序号列之前
+  if(grid.selectionBeforeIndex){
+    if(selectionCol){
+      __cols.push(selectionCol);
+    }
+    if(indexCol){
+      __cols.push(indexCol);
+    }
+  }else{//多选列在序号列之后
+    if(indexCol){
+      __cols.push(indexCol);
+    }
+    if(selectionCol){
+      __cols.push(selectionCol);
+    }
   }
   //行编辑状态显示列显示
   if(grid.showRowStatus){
