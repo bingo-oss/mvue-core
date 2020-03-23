@@ -427,7 +427,8 @@ export default{
                             params.filters=`(${params.filters}) and (${val})`;
                         }
                         break;
-                    case "orderby","select":
+                    case "orderby":
+                    case "select":
                         params[key]=val;
                         break;
                 }
