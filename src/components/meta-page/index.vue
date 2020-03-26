@@ -1,7 +1,7 @@
 <template>
   <div class="bvue-page" v-if="!noPage">
     <b-childheader v-if="showHeader" :title="innerTitle" :subtitle="header.description||header.subtitle" :show-back="header.showBack" :back-route="header.backRoute"></b-childheader>
-    <div class="bvue-page-body" v-if="renderLayout&&pageSettings.layout">
+    <div class="bvue-page-body" v-if="userHasPerms&&renderLayout&&pageSettings.layout">
         <meta-layout v-if="!showCard" :layout="pageSettings.layout"></meta-layout>
         <Card v-else>
             <meta-layout :layout="pageSettings.layout"></meta-layout>
@@ -30,6 +30,7 @@
 </template>
 <script>
 import  pageHelper from "./page-helper";
+import permUtils from '../../libs/security/permission';
 export default {
   props: {
     header: {
@@ -86,6 +87,9 @@ export default {
     },
     title: {//指定页面标题来自某个组件：{source:'来源组件id'}
       type: [String,Object]
+    },
+    security:{//页面需要的权限设置：单个权限entity:operationName 或 多个权限[entity:operationName,entity:operationName]
+      type:[String,Array]
     }
   },
   computed: {
@@ -143,13 +147,19 @@ export default {
     //model是第一个表单的entity数据
     let pageContext=pageHelper.buildPageContext(self);
     return {
+      userHasPerms:true,
       isPage: true,
       pageContext:pageContext,
       currentSourceTitle:''//临时存储当前来源传递的标题
     };
   },
   mounted(){
-
+    let userHasPerms= permUtils.hasPerms(this.security);
+    if(!userHasPerms){
+      this.userHasPerms=false;
+      this.errorObj.has=true;
+      this.errorObj.message=`未授权的操作：${this.security}`;
+    }
   },
   methods: {
     setTitleSource(){

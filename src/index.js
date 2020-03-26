@@ -92,6 +92,8 @@ import EntitySelect from './components/entity-select/index'
 import ObjectEditor from './components/form/control_tmpl/object-editor/index';
 import MultiObjectEditor from './components/form/control_tmpl/object-editor-multi/index';
 
+import CustomDirectives from './libs/directives';
+
 const formComponents={
     SingleLineText,
     MultiLineText,
@@ -274,6 +276,7 @@ let MvueCore={
 //Vue插件安装入口函数
 function install(Vue, opts = {}) {
     if (install.installed) return;
+    new CustomDirectives(Vue);
     context.init(Vue,opts);
 
     //注册组件到vue

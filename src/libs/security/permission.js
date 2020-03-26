@@ -123,6 +123,27 @@ export  default {
         });
         return result;
     },
+    /**
+     * @param perms 单个权限entity:operationName 或 多个权限[entity:operationName,entity:operationName]
+     */
+    hasPerms(perms){
+      if(perms){
+        let hasPerm=false;
+        if(_.isArray(perms)){
+          _.forEach(perms,sec=>{
+            hasPerm=this.hasPerm(sec);
+            if(!hasPerm){
+              return false;
+            }
+          });
+        }else{
+          hasPerm=this.hasPerm(perms);
+        }
+        return hasPerm;
+      }else{
+        return true;
+      }
+    },
     /** 行级数据权限判断
      *  @param entityData 实体的一条数据记录
      *  @param ops 需要判断操作名称，如：'edit' 或者 ['edit','create']
