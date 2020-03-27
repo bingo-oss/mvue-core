@@ -12,7 +12,6 @@
         :label="getTitleField()"
         :allowEmpty="!mustSelect"
         @search-change="searchChange"
-        @input="handleOnChange"
         :track-by="getIdField()">
         <template slot="option" slot-scope="props">
             <div class="option__desc">
@@ -70,6 +69,14 @@ export default {
             changedQueue:[]
         };
     },
+    watch:{
+        selectedItem:{
+            handler:function(){
+                this.handleOnChange();
+            },
+            immediate:false
+        }
+    },
     methods:{
         getIdField(){
             return this.metaEntity.getIdField().name;
@@ -123,9 +130,6 @@ export default {
         initOnFirstLoaded(items){
             if(this.mustSelect&&_.isEmpty(this.selectedItem)&&!_.isEmpty(items)){
                 this.selectedItem=items[0];
-                this.handleOnChange();
-            }else if(this.mustSelect&&!_.isEmpty(this.selectedItem)){
-                this.handleOnChange();
             }
         }
     }
