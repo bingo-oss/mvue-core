@@ -79,6 +79,10 @@
             selectCurrentUserOrg:{//是否默认查询当前用户所在部门
                 type:Boolean,
                 default:false
+            },
+            onlySelectCurrentUserOrg:{//是否只允许选当前用户所在部门
+                type:Boolean,
+                default:false
             }
         },
         watch: {
@@ -110,8 +114,8 @@
         data() {
             let selectedOrgIds=[];
             //如果指定默认选中当前用户所在部门
-            if(this.selectCurrentUserOrg){
-                let curUserOrgId=this.$session.getCurrentUser().org_id;
+            let curUserOrgId=this.$session.getCurrentUser().org_id;
+            if(this.selectCurrentUserOrg||this.onlySelectCurrentUserOrg){
                 if(!_.isNil(curUserOrgId)){
                     selectedOrgIds.push(curUserOrgId);
                 }
@@ -131,7 +135,8 @@
                 pageSize: 10,
                 total: 0,
                 selectedUsers:{},
-                queryKeyword: ''
+                queryKeyword: '',
+                curUserOrgId:curUserOrgId
             };
         },
         mounted() {

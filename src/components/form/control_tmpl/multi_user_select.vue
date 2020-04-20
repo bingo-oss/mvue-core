@@ -24,8 +24,7 @@
                     <template slot="option" slot-scope="props">
                         <div class="option__desc">
                             <span class="option__title">{{ props.option[getTitleField()] }}</span>
-                            <span>-</span>
-                            <span class="option__small">{{ props.option.email||props.option[getLoginField()] }}</span>
+                            <span class="option__small">{{ (props.option.email||props.option[getLoginField()]) ? '-'+(props.option.email||props.option[getLoginField()]):''}}</span>
                         </div>
                     </template>
                     <template slot="noResult">
@@ -63,6 +62,7 @@
                             :tree-expand-level="treeExpandLevel"
                             :tree-leaf-key="treeLeafKey"
                             :select-current-user-org="!!formItem.componentParams.selectCurrentUserOrg"
+                            :only-select-current-user-org="!!formItem.componentParams.onlySelectCurrentUserOrg"
                             :query-methods="queryMethods"></select-user>
                         </div>
                         <div slot="footer">
@@ -119,6 +119,10 @@ export default {
             var encodeKeyword=context.getMvueToolkit().utils.leapQueryValueEncode(keyword);
             let defaultFilters=this.getFilters();
             var filters= `(${this.getTitleField()} like '%${encodeKeyword}%' or ${this.getLoginField()}  like '%${encodeKeyword}%')`;
+            //如果设置了只查询当前用户部门数据，附加此条件
+            if(this.formItem.componentParams.onlySelectCurrentUserOrg){
+                filters =`(${filters} and ${context.getSettings().control.userSelect.orgField} eq ${this.curUserOrgId})`;
+            }
             if(defaultFilters){
                 filters=`${defaultFilters} and ${filters}`;
             }

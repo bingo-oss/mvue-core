@@ -49,9 +49,16 @@ export default {
         },
         buildRootOrg(){
             //加载根部门
-            this.queryMethods.queryRootOrg().then(items=>{
-                this.orgTreeData=this.toTreeData(items);
-            });
+            //仅查询本部门作为根
+            if(this.onlySelectCurrentUserOrg){
+                this.queryMethods.queryOrgByIds([this.curUserOrgId]).then(items=>{
+                    this.orgTreeData=this.toTreeData(items);
+                });
+            }else{
+                this.queryMethods.queryRootOrg().then(items=>{
+                    this.orgTreeData=this.toTreeData(items);
+                });
+            }
         },
         buildRootOrgByKeyword(){
             context.getMvueToolkit().utils.smartSearch(this,()=>{

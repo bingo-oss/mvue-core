@@ -8,10 +8,17 @@ let selectCurrentUserOrgProp={
     store:_types.store.MetaFieldInputParams,
     title:'默认查本部门用户'
 };
+let onlySelectCurrentUserOrgProp={
+    id:'onlySelectCurrentUserOrg',
+    inputType:_types.inputType.Boolean,
+    default:false,
+    store:_types.store.MetaFieldInputParams,
+    title:'仅查本部门用户'
+};
 const props={
-    SingleUserSelect:_types.merge(_types.placeholder,selectCurrentUserOrgProp,_types.defaultValue),
+    SingleUserSelect:_types.merge(_types.placeholder,selectCurrentUserOrgProp,onlySelectCurrentUserOrgProp,_types.defaultValue),
     SingleOrgSelect:_types.merge(_types.placeholder,_types.defaultValue),
-    MultiUserSelect:_types.merge(_types.placeholder,selectCurrentUserOrgProp),
+    MultiUserSelect:_types.merge(_types.placeholder,selectCurrentUserOrgProp,onlySelectCurrentUserOrgProp),
     MultiOrgSelect:_types.merge(_types.placeholder)
 };
 var orgUserTypes={

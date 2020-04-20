@@ -12,8 +12,11 @@ export default{
         }
     },
     data(){
+        //当前用户所在部门
+        let curUserOrgId=this.$session.getCurrentUser().org_id;
         return {
-            queryMethods:queryMethods
+            queryMethods:queryMethods,
+            curUserOrgId:curUserOrgId
         }
     },
     methods:{
@@ -22,7 +25,8 @@ export default{
         },
         renderFormat(item){
             var titleField=this.getTitleField();
-            return `${item[titleField]}-${this.buildUserDesc(item)}`;
+            let desc=this.buildUserDesc(item);
+            return `${item[titleField]}${desc?'-'+desc:''}`;
         },
         orgValueKey:function(){
             return context.getSettings().control.orgSelect.idField;
