@@ -76,6 +76,13 @@ const commonProps=[
     title:'提示位置'
   },
   {
+    id:'showLabel',
+    inputType:inputType.Boolean,
+    default:true,
+    store:store.Layout,
+    title:'显示标题'
+  },
+  {
     id:'semantics',
     inputType:inputType.SingleSelectWithInput,
     options:[

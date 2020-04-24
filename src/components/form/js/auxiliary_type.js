@@ -37,6 +37,13 @@ const auxiliaryTypes={
                 store:_types.store.Layout,
                 title:'文本内容'
             },
+            {
+                id:'style',
+                inputType:_types.inputType.SingleLineText,
+                default:'',
+                store:_types.store.Layout,
+                title:'css样式'
+            },
             _types.span
         ]
     }
