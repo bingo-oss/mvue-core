@@ -196,8 +196,12 @@ export default {
     //保存一下当前grid的状态到vuex，页码、快捷查询条件、排序等
     beforeDestroy(){
         var currentQueryCtx=_.cloneDeep(this.currentQueryCtx);
+        //弹出式高级查询
         if(this.$refs.advanceSearchRef){
-            currentQueryCtx.advModel=this.$refs.advanceSearchRef.model;
+            currentQueryCtx.advModel=this.$refs.advanceSearchRef.$refs.advFormRef.model;
+            currentQueryCtx.advanceSearchFilters=this.advanceSearchFilters;
+        }else if(this.$refs.advFormRef){//内联式高级查询
+            currentQueryCtx.advModel=this.$refs.advFormRef.model;
             currentQueryCtx.advanceSearchFilters=this.advanceSearchFilters;
         }
         this.$store.commit('core/keepGridStatus',{key:this.saveStatusKey,ctx:currentQueryCtx});
