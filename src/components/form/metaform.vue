@@ -319,13 +319,13 @@
                 });
             },
             validate(callback){
-                return this.$ref["formRef"].validate(callback);
+                return this.$refs["formRef"].validate(callback);
             },
             validateField(fieldName,callback){
-                return this.$ref["formRef"].validateField(fieldName,callback);
+                return this.$refs["formRef"].validateField(fieldName,callback);
             },
             resetFields(callback){
-                return this.$ref["formRef"].resetFields();
+                return this.$refs["formRef"].resetFields();
             }
         }
     }
