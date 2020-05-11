@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <Modal title="查看图片" v-model="visible" :cancel-text="''">
-                    <img class="preview-img" :src="previewImgSrc" v-if="visible">
+                    <ufs-image class="preview-img" v-if="visible" :item='previewItem' :paths='paths'></ufs-image>
                 </Modal>
             </div>
             <div class="form-item-view" v-else>无图片</div>
