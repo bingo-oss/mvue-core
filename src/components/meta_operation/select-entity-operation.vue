@@ -7,6 +7,7 @@
     :modal-title="operation.modalTitle"
     :btn-type="operation.btnType"
     :btn-icon="operation.btnIcon"
+    :params="operation.comParams"
     @on-select-change="confirmSelect">
   </component>
   <m-entity-select v-else
