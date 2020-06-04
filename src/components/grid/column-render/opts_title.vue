@@ -31,6 +31,7 @@
 <script>
 import context from '../../../libs/context';
 import batchEditorSupport from './batch-editor-support';
+import sc from '../../../libs/security/permission';
 export default {
     mixins:[batchEditorSupport],
     props:{
@@ -69,7 +70,7 @@ export default {
             var btn=_.find(this.btns, function(o) { 
                 return o.id ==='view'; 
             });
-            if(btn&&context.getMvueToolkit().utils.hasDataPerm(this.item,btn)){
+            if(btn&&sc.hasRowPerm(this.item,btn.security)){
                 this.handleBtnClick(btn);
             }
         },
@@ -85,7 +86,7 @@ export default {
                 if(o.id ==='view'){
                     return false;
                 }
-                let has=context.getMvueToolkit().utils.hasDataPerm(_this.item,o);
+                let has=sc.hasRowPerm(_this.item,o.security);
                 return has;
             });
             return _btns;

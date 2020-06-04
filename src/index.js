@@ -223,7 +223,6 @@ import metaLayoutConvertor from './components/meta-layout/layout-convertor';
 import formConstants from './components/form/js/constants';
 import formValidationPattern from './components/form/js/validation_pattern';
 import controlTypeService from './components/form/js/control_type_service';
-import commonOperation from './components/meta_operation/js/common_operation';
 
 import  context from "./libs/context";
 import permissionService from "./libs/security/permission";

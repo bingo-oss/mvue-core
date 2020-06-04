@@ -9,6 +9,7 @@
 </template>
 <script>
 import globalContext from '../../../libs/context';
+import sc from '../../../libs/security/permission';
 export default {
   props:{
     btns:{
@@ -39,7 +40,7 @@ export default {
         permedBtns(){
             var _this=this;
             let _btns= _.filter(this.btns, function(o) { 
-                let has=globalContext.getMvueToolkit().utils.hasDataPerm(_this.item,o); 
+                let has=sc.hasRowPerm(_this.item,o.security); 
                 return has;
             });
             return _btns;
