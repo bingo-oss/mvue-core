@@ -7,6 +7,7 @@ var filesize = require('file-size');
 export default {
     data:function(){
         return {
+            previewModalWidth:800,
             multiple:false,
             uploadAction:"",
             defaultList:[],

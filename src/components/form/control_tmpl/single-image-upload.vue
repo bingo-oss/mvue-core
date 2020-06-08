@@ -10,7 +10,7 @@
                         </div>
                     </div>
                 </div>
-                <Modal title="查看图片" v-model="visible" :cancel-text="''">
+                <Modal :width="previewModalWidth" title="查看图片" class="preview-img-modal" v-model="visible" :cancel-text="''">
                     <ufs-image class="preview-img" v-if="visible" :item='previewItem' :paths='paths'></ufs-image>
                 </Modal>
             </div>
@@ -52,7 +52,7 @@
                         <Icon type="ios-image-outline" :size="uploadIconSize" color="#becbd9"/>
                     </div>
                 </Upload>
-                <Modal title="查看图片" v-model="visible" :cancel-text="''">
+                <Modal :width="previewModalWidth" title="查看图片" class="preview-img-modal" v-model="visible" :cancel-text="''">
                     <ufs-image class="preview-img" v-if="visible" :item='previewItem' :paths='paths'></ufs-image>
                 </Modal>
             </div>
@@ -146,9 +146,6 @@ export default {
     }
     .demo-upload-list:hover .demo-upload-list-cover{
         display: block;
-    }
-    .preview-img{
-        max-width:100%;
     }
 </style>
 
