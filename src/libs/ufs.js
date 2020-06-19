@@ -14,14 +14,16 @@ function getStorageClient(){
     });
     return storageClient;
 }
-function upload(file,options){
+function upload(file,options,requestOptions){
     let storageClient=getStorageClient();
     let apiBaseUrl=getUfsEndpoint();
     options=_.assign({baseUrl:apiBaseUrl},options);
+    requestOptions=requestOptions||{};
     return new Promise((resolve,reject)=>{
         //执行上传
         storageClient.upload({
-            file: file
+            file: file,
+            ...requestOptions
         },options).then((data) => {
             resolve(data);
         }).catch((err) => {

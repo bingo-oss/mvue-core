@@ -48,7 +48,9 @@ function impl(context,$optInst){
                 contextHelper.getRouter().go(-1);
             }
         }
-    },(err)=>{});
+    },(err)=>{
+        $optInst.mustStopRepeatedClick=false;
+    });
 }
 export default  operation
 

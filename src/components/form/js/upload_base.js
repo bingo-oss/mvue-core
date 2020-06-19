@@ -206,7 +206,9 @@ export default {
                 }
             }
             uploadRef.handleStart(file);
-            ufs.upload(file).then((res)=>{
+            //附加ufs相关的请求参数
+            let ufsOptions=this.formItem.componentParams.ufsOptions;
+            ufs.upload(file,null,ufsOptions).then((res)=>{
                 uploadRef.handleSuccess(res, file);
             },(err)=>{
                 uploadRef.handleError(err, null, file);
