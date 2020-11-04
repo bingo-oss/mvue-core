@@ -6,6 +6,12 @@ function getUserIdField(){
 function getUserTitleField(){
     return context.getSettings().control.userSelect.nameField;
 };
+function getUserLoginField(){
+    return context.getSettings().control.userSelect.loginField;
+};
+function getUserExpand(){
+    return context.getSettings().control.userSelect.expand;
+};
 function getUserOrgField(){
     return context.getSettings().control.userSelect.orgField;
 };
@@ -119,10 +125,23 @@ function rebuildUserFilters(_filters){
     }
     return _filters;
 }
+function buildUserSelectFields(){
+    return `${getUserIdField()},${getUserTitleField()},${getUserLoginField()},${context.getSettings().control.userSelect.detailFields}`;
+}
+function rebuildUserQueryOptions(queryOptions){
+    let expand=getUserExpand();
+    if(expand){
+        queryOptions.expand=expand;
+    }
+    let selectFields=buildUserSelectFields();
+    queryOptions.select=selectFields;
+}
 //关键字查询用户,如果userIds不为空，需要附加userIds代表的用户
 function queryUserByKeyword(keyword,userIds){
     let _filters=rebuildUserFilters(`${getUserTitleField()} like '%${keyword}%'`);
-    var one = userService().query({filters:_filters});
+    let queryOptions={filters:_filters};
+    rebuildUserQueryOptions(queryOptions);
+    var one = userService().query(queryOptions);
     return new Promise((resolve,reject)=>{
         one.then(({data:usersOne})=>{
             if(!_.isEmpty(userIds)){
@@ -144,7 +163,9 @@ function queryUserByKeyword(keyword,userIds){
 //查询指定ids的用户
 function queryUserByIds(userIds){
     let inIds=context.buildLeapIn(userIds);
-    return userService().query({filters:`${getUserIdField()} in ${inIds}`}).then(({data})=>{
+    let queryOptions={filters:`${getUserIdField()} in ${inIds}`};
+    rebuildUserQueryOptions(queryOptions);
+    return userService().query(queryOptions).then(({data})=>{
         return data;
     });
 }
@@ -156,14 +177,18 @@ function pageQueryUserByOrg(orgIds,userIds,pageParams){//{page:1,pageSize:10}
         filters=`${getUserOrgField()} in ${inIds}`;
     }
     filters=rebuildUserFilters(filters);
-    var one = userService().query({total:true,page:pageParams.page,page_size:pageParams.pageSize,filters:filters});
+    let queryOptions={total:true,page:pageParams.page,page_size:pageParams.pageSize,filters:filters};
+    rebuildUserQueryOptions(queryOptions);
+    var one = userService().query(queryOptions);
     return new Promise((resolve,reject)=>{
         one.then(res=>{
             var total=_.toSafeInteger(res.headers['x-total-count'])||res.data.length;
             var usersOne=res.data;
             if(!_.isEmpty(userIds)){
                 let inIds=context.buildLeapIn(userIds);
-                userService().query({filters:`${getUserIdField()} in ${inIds}`}).then(({data:usersTwo})=>{
+                let _queryOptions={filters:`${getUserIdField()} in ${inIds}`};
+                rebuildUserQueryOptions(_queryOptions);
+                userService().query(_queryOptions).then(({data:usersTwo})=>{
                     //usersTwo如果包含在usersOne中，去重
                     resolve({
                         data:concatIgnoreDuplicated(usersOne,usersTwo),
@@ -187,14 +212,18 @@ function pageQueryUserByOrg(orgIds,userIds,pageParams){//{page:1,pageSize:10}
 function pageQueryUserByKeyword(queryKeyword,userIds,pageParams){//{page:1,pageSize:10}
     var filters=`${getUserTitleField()} like '%${queryKeyword}%'`;
     filters=rebuildUserFilters(filters);
-    var one = userService().query({total:true,page:pageParams.page,page_size:pageParams.pageSize,filters:filters});
+    let queryOptions={total:true,page:pageParams.page,page_size:pageParams.pageSize,filters:filters};
+    rebuildUserQueryOptions(queryOptions);
+    var one = userService().query(queryOptions);
     return new Promise((resolve,reject)=>{
         one.then(res=>{
             var total=_.toSafeInteger(res.headers['x-total-count'])||res.data.length;
             var usersOne=res.data;
             if(!_.isEmpty(userIds)){
                 let inIds=context.buildLeapIn(userIds);
-                userService().query({filters:`${getUserIdField()} in ${inIds}`}).then(({data:usersTwo})=>{
+                let _queryOptions={filters:`${getUserIdField()} in ${inIds}`};
+                rebuildUserQueryOptions(_queryOptions);
+                userService().query(_queryOptions).then(({data:usersTwo})=>{
                     //usersTwo如果包含在usersOne中，去重
                     resolve({
                         data:concatIgnoreDuplicated(usersOne,usersTwo),

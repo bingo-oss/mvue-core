@@ -20,8 +20,15 @@ export default{
         }
     },
     methods:{
+        getLoginField(){
+            return context.getSettings().control.userSelect.loginField;
+        },
         buildUserDesc(userItem){
-            return userItem.email||userItem.userName||userItem.loginId;
+            let extraInfoBuilder = context.getSettings().control.userSelect.extraInfoBuilder;
+            if(extraInfoBuilder){
+                return extraInfoBuilder(userItem);
+            }
+            return userItem.email||userItem[this.getLoginField()];
         },
         renderFormat(item){
             var titleField=this.getTitleField();

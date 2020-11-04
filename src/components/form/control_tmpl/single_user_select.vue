@@ -22,7 +22,7 @@
                     <template slot="option" slot-scope="props">
                         <div class="option__desc">
                             <span class="option__title">{{ props.option[getTitleField()] }}</span>
-                            <span class="option__small">{{ (props.option.email||props.option[getLoginField()]) ? '-'+(props.option.email||props.option[getLoginField()]):''}}</span>
+                            <span class="option__small">{{ buildExtraInfo(props.option)}}</span>
                         </div>
                     </template>
                     <template slot="noResult">
@@ -39,7 +39,7 @@
                     <Icon :type="btnIcon"></Icon>
                 </div>
                 <Modal class="bvue-select-modal" v-model="popupWidgetModal"
-                        :width="modalWidth"
+                        :width="getModalWidth()"
                         :title="modalTitle"
                         :scrollable="true"
                         :mask-closable="false"
@@ -118,12 +118,22 @@ export default {
                 filters=`${defaultFilters} and ${filters}`;
             }
             params.filters=filters;
+            let expand=this.getExpand();
+            if(expand){
+                params.expand=expand;
+            }
         },
         buildSelectFields(){
             return `${this.getIdField()},${this.getTitleField()},${this.getLoginField()},${context.getSettings().control.userSelect.detailFields}`;
         },
         getFilters(){
             return context.getSettings().control.userSelect.filters;
+        },
+        getExpand(){
+            return context.getSettings().control.userSelect.expand;
+        },
+        getModalWidth(){
+            return context.getSettings().control.userSelect.modalWidth||80;
         },
         getEntityName(){
             return context.getSettings().control.userSelect.entityName;
@@ -156,6 +166,16 @@ export default {
                 this.handleOnSelectChange(data,null);
                 this.close();
             });
+        },
+        buildExtraInfo(item){
+            let extraInfoBuilder = context.getSettings().control.userSelect.extraInfoBuilder;
+            if(extraInfoBuilder){
+                let extra = extraInfoBuilder(item);
+                return extra?('-'+extra):''
+            }else{
+                let extra=item.email||item[this.getLoginField()];
+                return extra?('-'+extra):''
+            }
         }
     },
     components:{
