@@ -1,8 +1,8 @@
 {
   "name": "mvue-core",
-  "version": "2.0.238",
+  "version": "2.0.240",
   "description": "mvue project core components",
-  "main": "src/index.js",
+  "main": "dist/lib/index.js",
   "scripts": {
     "build": "npm run locale && node build/build-lib.js",
     "locale": "webpack --config build/webpack.dist.locale.config.js",

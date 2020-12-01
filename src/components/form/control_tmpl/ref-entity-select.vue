@@ -11,7 +11,7 @@
             <Tag color="success" v-if="(!multiple)&&selectedItem" :title="title(selectedItem)">{{shortTitle(selectedItem)}}</Tag>
         </div>
     </div>
-    <div style="width:80%;">
+    <div style="width:80%;" :style="{height:modalHeight?(modalHeight+'px'):'100px',overflow:'auto'}">
         <Row>
             <Col span="24" style="border-right:1px solid #e8e8e8;">
                 <meta-grid v-if="preprocessed" ref="gridList"

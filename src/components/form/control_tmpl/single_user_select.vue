@@ -44,8 +44,9 @@
                         :scrollable="true"
                         :mask-closable="false"
                         >
-                        <div class="bvue-select-modal" :style="{height:innerModalHeight+'px',overflow:'auto'}">
+                        <div class="bvue-select-modal">
                             <select-user ref="selectRef" v-if="popupWidgetModal"
+                            :height="innerModalHeight"
                             :initial-value="value"
                             :multiple="false"
                             :label-key="getTitleField()"
@@ -77,6 +78,9 @@ import selectModal from '../mixins/select-modal';
 import selectUserBase from './user-select/select-user-base';
 export default {
     mixins: [controlBase,entitySelect,selectModal,selectUserBase],
+    components:{
+        selectUser:require('./user-select/select-user').default
+    },
     props: {
         "value":{type:[String,Number],default:null}
     },
@@ -177,9 +181,6 @@ export default {
                 return extra?('-'+extra):''
             }
         }
-    },
-    components:{
-        selectUser:require('./user-select/select-user').default
     }
 }
 </script>

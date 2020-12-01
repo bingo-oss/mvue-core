@@ -49,8 +49,9 @@
                         :scrollable="true"
                         :mask-closable="false"
                         >
-                        <div class="bvue-select-modal" :style="{height:innerModalHeight+'px',overflow:'auto'}">
+                        <div class="bvue-select-modal">
                             <select-user ref="selectRef" v-if="popupWidgetModal"
+                            :height="innerModalHeight"
                             :initial-value="value"
                             :multiple="true"
                             :label-key="getTitleField()"

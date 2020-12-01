@@ -1,12 +1,15 @@
 <template>
-    <Row type="flex" justify="center" class="bvue-select-tree-group">
+    <Row type="flex" justify="center" class="bvue-select-tree-group"
+        :class="{'single-user-select-transfer':!multiple}">
         <i-col span="5">
-            <div class="bvue-select-tree">
+            <div class="bvue-select-tree"
+                :style="{height:height+'px',overflow:'auto'}">
                 <Tree :multiple="false" :data="orgTreeData" :load-data="queryOrgByParent" @on-select-change="handleOrgSelectChange"></Tree>
             </div>
         </i-col>
         <i-col span="19">
-            <div class="bvue-select-transfer">
+            <div class="bvue-select-transfer"
+                :style="{height:height+'px',overflow:'auto'}">
                 <search :query="queryKeyword" @on-query-clear="handleQueryClear" @on-query-change="handleQueryChange" :placeholder="queryPlaceholder" class="mb-sm" style="width:200px;" ></search>
 
                 <Transfer ref="transferRef" :data="sourceUsers" :titles="transferTitles" :target-keys="selectedIds" :render-format="renderFormat" style="height:300px;"
@@ -83,6 +86,10 @@
             onlySelectCurrentUserOrg:{//是否只允许选当前用户所在部门
                 type:Boolean,
                 default:false
+            },
+            height:{
+                type:Number,
+                default:370
             }
         },
         watch: {
@@ -236,3 +243,10 @@
         }
     };
 </script>
+<style lang="less">
+.single-user-select-transfer{
+    .ivu-transfer-list-header .ivu-checkbox-wrapper{
+        display:none;
+    }
+}
+</style>
