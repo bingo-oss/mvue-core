@@ -100,9 +100,15 @@ export default {
         dateMapping[controlTypeService.componentTypes.Date.id]=true;
         dateMapping[controlTypeService.componentTypes.Time.id]=true;
         //单选项类型查询条件用in
-        let multiSelectMapping={};
-        multiSelectMapping[controlTypeService.componentTypes.RadioButton.id]=true;
-        multiSelectMapping[controlTypeService.componentTypes.SingleSelect.id]=true;
+        let singleSelectMapping={};
+        singleSelectMapping[controlTypeService.componentTypes.RadioButton.id]=true;
+        singleSelectMapping[controlTypeService.componentTypes.SingleSelect.id]=true;
+        //数组类型引用数据查询用or like
+        let arrayRefMapping={};
+        arrayRefMapping[controlTypeService.componentTypes.MultiUserSelect.id]=true;
+        arrayRefMapping[controlTypeService.componentTypes.MultiOrgSelect.id]=true;
+        arrayRefMapping[controlTypeService.componentTypes.MultiRefEntity.id]=true;
+        arrayRefMapping[controlTypeService.componentTypes.MultiSelect.id]=true;
 
         if(textMapping[inputType]){
             advanceSearchFilters.push({
@@ -124,7 +130,7 @@ export default {
                 op:"le",
                 value:value[1]
             });
-        }else if(multiSelectMapping[inputType]){
+        }else if(singleSelectMapping[inputType]){
             if(!_.isEmpty(value)){
                 //开启了其他选项的，查询用like
                 let showOthers=metaField.inputTypeParams&&metaField.inputTypeParams.showOthers;
@@ -150,6 +156,14 @@ export default {
                         value:value
                     });
                 }
+            }
+        }else if(arrayRefMapping[inputType]){
+            if(!_.isEmpty(value)){
+                advanceSearchFilters.push({
+                    key:key,
+                    op:"co",
+                    value:value
+                });
             }
         }else if(_.isPlainObject(value)
             && value.hasOwnProperty('op')
