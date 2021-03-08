@@ -109,6 +109,7 @@ export default {
         arrayRefMapping[controlTypeService.componentTypes.MultiOrgSelect.id]=true;
         arrayRefMapping[controlTypeService.componentTypes.MultiRefEntity.id]=true;
         arrayRefMapping[controlTypeService.componentTypes.MultiSelect.id]=true;
+        arrayRefMapping[controlTypeService.componentTypes.CheckboxGroup.id]=true;
 
         if(textMapping[inputType]){
             advanceSearchFilters.push({
