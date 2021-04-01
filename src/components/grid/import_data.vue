@@ -469,20 +469,5 @@ export default {
     }
 }
 </script>
-<style lang="less">
-.grid-import-data-con{
-    display:inline-block;
-    width:100%;
-    .mapping-btn-item{
-        cursor: pointer;
-    }
-}
-.highlight-number{
-    color:#ff9900;
-}
-.margin-top42{
-    margin-top:42px;
-}
-</style>
 
 

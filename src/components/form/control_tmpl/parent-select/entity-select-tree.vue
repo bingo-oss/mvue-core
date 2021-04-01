@@ -148,20 +148,3 @@
         }
     };
 </script>
-
-<style lang="less">
-    .hover-show-item-con .hover-show-item {
-        display: none;
-    }
-
-    .hover-show-item-con:hover {
-        background-color: #f8f8f9;
-        
-    }
-    .hover-show-item {
-        display: inline-block;
-        cursor: pointer;
-        font-size: 16px;
-        color: #ed4014;
-    }
-</style>

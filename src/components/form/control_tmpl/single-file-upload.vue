@@ -45,22 +45,5 @@ export default {
     mixins: [controlBase,singleUpload,uploadBase]
 }
 </script>
-<style lang="less">
-    .ivu-upload-list-file{
-        .del-btn{
-            display: none;
-            position: absolute;
-            right: 10px;
-            top: 13px;
-            font-size: 14px;
-            color:#fc1e70;
-        }
-        &:hover{
-            .del-btn{
-                display: inline-block;
-            }
-        }
-    }
-</style>
 
 

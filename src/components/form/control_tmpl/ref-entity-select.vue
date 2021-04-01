@@ -124,16 +124,3 @@ export default {
     }
 }
 </script>
-<style lang="less">
-.ref-entity-list-header{
-    padding: 8px 16px;
-    background: #f9fafc;
-    color: rgba(0, 0, 0, 0.65);
-    border-bottom: 1px solid #e8e8e8;
-    overflow: hidden;
-    width: 100%;
-}
-.ref-entity-list-body{
-    padding:16px 0px 0px 16px;
-}
-</style>

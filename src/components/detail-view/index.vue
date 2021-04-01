@@ -301,7 +301,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

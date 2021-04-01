@@ -144,25 +144,5 @@ export default {
     }
 }
 </script>
-<style lang="less">
-.popup-widget-con{
-    .modal-inner-widget{
-        overflow:auto;
-        padding-right:16px;
-    }
-    // .ivu-modal-footer{
-    //     padding:0px;
-    //     border:none;
-    // }
-    .ivu-modal-body{
-        padding-right:0px;
-    }
-    .ivu-modal-footer{
-        .ivu-form-item{
-            margin-bottom:0px;
-        }
-    }
-}
-</style>
 
 

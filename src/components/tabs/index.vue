@@ -27,9 +27,4 @@
         }
     }
 </script>
-<style lang="less">
-.ivu-tabs-tabpane .b-tabs-pane-content .ivu-form{
-    margin: 16px;
-}
-</style>
 

@@ -114,47 +114,5 @@ export default {
     }
 }
 </script>
-<style lang="less">
-.opts-title-con{
-    display:table;
-    width:100%;
-    .table-column-center{
-        display:table-cell;
-        vertical-align: middle;
-    }
-    .title-con-box{
-        width:67%;
-        &:hover{
-            text-decoration: underline;
-            cursor: pointer;
-        }
-    }
-    .opts-con-box{
-        width:33%;
-    }
-    .opts-con{
-        display:none;
-        .opt-btn{
-            color:#949494;
-            padding:0px;
-            border:0px;
-            margin-right:8px;
-            float:left;
-        }
-        .opts-dropdown{
-            float:left;
-            a{
-                color:#949494;
-            }
-        }
-    }
-}
-.ivu-table-row .opts-title-con.opts-title-con-showopts .opts-con{
-    display: block;
-}
-.ivu-table-row.ivu-table-row-hover .opts-title-con .opts-con{
-    display: block;
-}
-</style>
 
 

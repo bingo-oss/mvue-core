@@ -137,10 +137,5 @@ export default {
     }
 }
 </script>
-<style lang="less">
-.clear-model-check .ivu-form-item-content{
-    margin-left:10px !important;
-}
-</style>
 
 

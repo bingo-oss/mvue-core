@@ -44,17 +44,5 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
-.img-title-con{
-    margin-top:3px;
-    margin-left:-15px;
-    .imgBox{
-        padding:10px 0px;
-    }
-    .detailBox{
-        padding-top:10px;
-    }
-}
-</style>
 
 

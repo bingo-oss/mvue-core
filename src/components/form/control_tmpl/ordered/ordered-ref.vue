@@ -118,8 +118,3 @@ export default {
   }
 }
 </script>
-<style>
-.orgdered-ref-item{
-  margin-bottom:10px;
-}
-</style>

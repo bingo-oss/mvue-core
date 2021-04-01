@@ -53,7 +53,7 @@ function currentSwagger(projectId){
       return Promise.resolve();
     }
     return new Promise(function(reslove,reject){
-      var swagger= swaggerBaseUrl+"/swagger.json";
+      var swagger= swaggerBaseUrl+"/swagger.json?parts=definitions";
       reslove(swagger);
     });
   }
@@ -68,7 +68,7 @@ function currentSwagger(projectId){
       return null;
     }
     currentEngineUrl=data.engine.externalUrl;
-    var swagger=`${data.engine.externalUrl}/swagger.json`;
+    var swagger=`${data.engine.externalUrl}/swagger.json?parts=definitions`;
     return swagger;
   });
 }

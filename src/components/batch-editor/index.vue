@@ -564,17 +564,4 @@ export default {
     }
 }
 </script>
-<style lang="less">
-.m-batch-editor .ivu-table-cell{
-    .ivu-form-item-label{
-        display: none !important;
-    }
-    .ivu-form-item-content{
-        margin-left:0px !important;
-    }
-    .ivu-form-item{
-        margin-bottom:0px;
-    }
-}
-</style>
 

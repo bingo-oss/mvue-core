@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="issued-number-con">
         <template v-if="viewMode">
             <div v-text="issuedObject.fullText||emptyText"></div>
         </template>
@@ -72,20 +72,5 @@
         }
     }
 </script>
-<style lang="less" scoped>
-.issued_align{  height: 33px; line-height: 33px; text-align: center ;width:100%;}
-._p0{ padding-left: 0;}
-.col-md-1{
-    width:8.33333333%;
-    display:inline-block;
-}
-.col-md-3{
-    width:25%;
-    display:inline-block;
-}
-.issued-input{
-    width:100%;
-}
-</style>
 
 

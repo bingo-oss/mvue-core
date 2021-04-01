@@ -74,10 +74,3 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-.grid-advance-search-con{
-    display:inline-block;
-    margin-right: 4px;
-}
-</style>
-

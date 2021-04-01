@@ -115,11 +115,6 @@ export default {
     }
 }
 </script>
-<style lang="less">
-.ivu-table-cell .link-title-opt.div-inline-block{
-    display: block;
-}
-</style>
 
 
 

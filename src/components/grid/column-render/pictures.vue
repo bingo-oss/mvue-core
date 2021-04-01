@@ -48,22 +48,4 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
-.grid-col-pictures{
-    padding:5px;
-    img{
-        width:32px;
-        height:32px;
-        margin-right:5px;
-        margin-bottom:5px;
-        margin-top: 10px;
-    }
-    img:hover{
-        cursor: pointer;
-    }
-    .preview-img{
-        max-width:100%;
-    }
-}
-</style>
 

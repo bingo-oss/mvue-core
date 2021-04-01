@@ -90,8 +90,3 @@ export default {
     }
 }
 </script>
-<style>
-.m-relation-item .b-list .b-list-header {
-    margin-bottom: 0px;
-}
-</style>

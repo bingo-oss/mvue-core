@@ -97,12 +97,4 @@ export default {
     }
 }
 </script>
-<style>
-    .m-parent-select-input{
-        display: table-cell;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        vertical-align: middle;
-    }
-</style>
 

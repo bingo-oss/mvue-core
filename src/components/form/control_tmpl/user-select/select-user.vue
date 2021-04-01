@@ -243,10 +243,3 @@
         }
     };
 </script>
-<style lang="less">
-.single-user-select-transfer{
-    .ivu-transfer-list-header .ivu-checkbox-wrapper{
-        display:none;
-    }
-}
-</style>
